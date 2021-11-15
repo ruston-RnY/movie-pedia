@@ -1,0 +1,164 @@
+nav {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 30px 5% 0;
+  z-index: 100;
+
+  @media (max-width: 576px) {
+    padding: 15px 5% 0;
+  }
+
+  .logo {
+    color: #fff !important;
+    font-size: 30px;
+    cursor: pointer;
+    text-decoration: none;
+
+    span {
+      color: #B70204;
+      font-weight: 700;
+    }
+  }
+
+  ul {
+    flex: 1;
+    text-align: right;
+    position: relative;
+
+    li {
+      display: inline-block;
+      margin: 0 42px;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+
+        &:hover {
+          color: #B70204;
+          text-decoration: none;
+        }
+
+        &.active {
+          border-bottom: 2px solid #B70204;
+          padding-bottom: 5px;
+        }
+      }
+
+      #search-bar {
+
+        i {
+          position: relative;
+          top: 3px;
+          cursor: pointer;
+
+          &:hover {
+            color: #B70204;
+          }
+
+        }
+
+        input {
+          position: absolute;
+          right: 30px;
+          top: -3px;
+          padding: 5px 15px;
+          border-radius: 55px;
+          color: #fff;
+          font-size: 14px;
+          background: transparent;
+          outline: none;
+          width: 0px;
+          transition: 1s;
+          border: 0;
+
+          &::placeholder {
+            text-align: center;
+            color: #fff;
+          }
+
+          &.active {
+            width: 260px;
+            border: 1px solid #000;
+            background: #fb1c1cde;
+          }
+        }
+
+
+      }
+    }
+
+  }
+
+  .menu {
+    width: 30px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .burger-btn {
+    width: 40px;
+    height: 30px;
+    position: relative;
+    margin-left: auto;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 5px;
+      width: 100%;
+      background: #d3531a;
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+
+      &:nth-child(1) {
+        top: 0px;
+      }
+
+      &:nth-child(2) {
+        top: 12px;
+      }
+
+      &:nth-child(3) {
+        top: 12px;
+      }
+
+      &:nth-child(4) {
+        top: 24px;
+      }
+    }
+
+    &.active {
+      span {
+        &:nth-child(1) {
+          top: 18px;
+          width: 0%;
+          left: 50%;
+        }
+
+        &:nth-child(2) {
+          transform: rotate(45deg);
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        &:nth-child(4) {
+          top: 18px;
+          width: 0%;
+          left: 50%;
+        }
+      }
+    }
+  }
+
+}
