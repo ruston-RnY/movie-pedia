@@ -2,15 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BannerComponent } from './banner/banner.component';
+import { SectionThumbComponent } from './section-thumb/section-thumb.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 
 @NgModule({
   declarations: [
-    BannerComponent
+    BannerComponent,
+    SectionThumbComponent,
+    ContactUsComponent
   ],
   exports: [
-    BannerComponent
+    BannerComponent,
+    SectionThumbComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule

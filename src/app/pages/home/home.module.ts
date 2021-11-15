@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 import { HomeComponent } from './home.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HomeComponent } from './home.component';
   imports: [
     RouterModule.forChild([{ path: '', component: HomeComponent }]),
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    SlickCarouselModule
   ]
 })
 export class HomeModule { }

@@ -1,3 +1,26 @@
 <section class="home">
    <app-banner></app-banner>
+   <div class="upcoming-movies">
+      <div class="container">
+          <div class="upcoming-title">
+              <h2>Upcoming <span>Movies</span></h2>
+              <span>Don't miss the latest movie info</span>
+          </div>
+          <div class="slider">
+            <ngx-slick-carousel class="carousel" 
+                     #slickModal="slick-carousel" 
+                     [config]="slideConfig">
+               <div ngxSlickItem *ngFor="let slide of data" class="slide">
+                  <div class="slider-img">
+                     <img class="card-img-top" [src]="slide.image" alt="Card image cap">
+                     <div class="overlay"></div>
+                     <button class="btn btn-detail" data-toggle="modal" data-target="#modalDetail">Detail</button>
+                  </div>
+               </div>
+            </ngx-slick-carousel>
+          </div>
+      </div>
+   </div>
+   <app-section-thumb></app-section-thumb>
+   <app-contact-us></app-contact-us>
 </section>
