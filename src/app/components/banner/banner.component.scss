@@ -22,7 +22,7 @@
       min-height: 100vh;
     }
 
-    @media (max-width: 1024px) {
+    @media (min-width: 576px) {
       min-height: 60vh;
     }
 
@@ -94,6 +94,7 @@
         flex-basis: 100%;
         order: 1;
         background: transparent;
+        padding: 0 3%;
       }
 
       .banner-content {

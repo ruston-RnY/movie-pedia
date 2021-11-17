@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +6,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('header') head: ElementRef;
+  openHeader: boolean = false;
 
-  constructor() { }
+  constructor(
+    private renderer: Renderer2,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  @HostListener('window:scroll', ['$event']) onScrollEvent($event: any) {
+    let scroll = window.pageYOffset;
+    if (scroll <= 85) {
+      this.renderer.removeClass(this.head.nativeElement, 'fix-top');
+    } else if (scroll > 95) {
+      this.renderer.addClass(this.head.nativeElement, 'fix-top');
+    }
+  }
+
+  onOpenHeader() {
+    this.openHeader = !this.openHeader;
+    if (this.openHeader == true) {
+      this.renderer.addClass(document.documentElement, 'overflow-hidden');
+    } else {
+      this.onCloseHeader();
+    }
+  }
+
+  onCloseHeader() {
+    this.openHeader = false;
+    this.renderer.removeClass(document.documentElement, 'overflow-hidden');
+  }
 }

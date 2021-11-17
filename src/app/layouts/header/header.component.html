@@ -1,21 +1,40 @@
-<nav>
-   <a class="logo" href="#">Movie<span>pedia</span></a>
-   <ul class="d-lg-block d-none">
-       <li>
-           <a class="active" href="index.html">Home</a>
-       </li>
-       <li>
-           <a class="" href="movies.html">Movies</a>
-       </li>
-       <li class="">
-           <a class="" href="about.html">About</a>
-       </li>
-       <li>
-           <div id="search-bar">
-               <input type="text" placeholder="search your movies..." id="search">
-               <i class="fas fa-search" id="ic-search"></i>
-           </div>
-       </li>
-   </ul>
-   <img src="../../../assets/image/menu.png" class="menu d-lg-none d-block">
-</nav>
+<div class="main-head" [ngClass]="{'open': openHeader == true}" #header>
+    <nav>
+        <a class="logo" href="#">Movie<span>pedia</span></a>
+        <ul class="menu">
+            <li>
+                <a class="active" href="index.html">Home</a>
+            </li>
+            <li>
+                <a class="" href="movies.html">Movies</a>
+            </li>
+            <li class="">
+                <a class="" href="about.html">About</a>
+            </li>
+            <li>
+                <div id="search-bar">
+                    <input type="text" placeholder="search your movies..." id="search">
+                    <i class="fas fa-search" id="ic-search"></i>
+                </div>
+            </li>
+        </ul>
+        <img src="../../../assets/image/menu.png" class="ic-menu d-lg-none d-block" (click)="onOpenHeader()">
+    </nav>
+    <!-- <ul class="menu-mobile list-unstyled">
+        <li>
+            <a class="active" href="index.html">Home</a>
+        </li>
+        <li>
+            <a class="" href="movies.html">Movies</a>
+        </li>
+        <li class="">
+            <a class="" href="about.html">About</a>
+        </li>
+        <li>
+            <div id="search-bar">
+                <input type="text" placeholder="search your movies..." id="search">
+                <i class="fas fa-search" id="ic-search"></i>
+            </div>
+        </li>
+    </ul> -->
+</div>
