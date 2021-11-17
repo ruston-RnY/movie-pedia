@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BannerComponent } from './banner/banner.component';
 import { SectionThumbComponent } from './section-thumb/section-thumb.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ListMoviesComponent } from './list-movies/list-movies.component';
 
 
 
@@ -11,12 +12,14 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
   declarations: [
     BannerComponent,
     SectionThumbComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ListMoviesComponent
   ],
   exports: [
     BannerComponent,
     SectionThumbComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ListMoviesComponent,
   ],
   imports: [
     CommonModule

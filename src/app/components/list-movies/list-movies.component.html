@@ -1,0 +1,17 @@
+<div class="movies">
+   <div class="container">
+      <h1 class="category-title">All movies</h1>
+      <div class="list-movies">
+         <div class="row">
+             <div class="col-lg-2 col-md-3 col-6 col-custom" *ngFor="let item of movies">
+                 <div class="slider-img">
+                     <img class="card-img-top" [src]="item.image" alt="Card image cap">
+                     <p class="title position-absolute">{{ item.title }}</p>
+                     <div class="overlay"></div>
+                     <button class="btn btn-detail" data-toggle="modal" data-target="#modalDetail">Detail</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+   </div>
+</div>

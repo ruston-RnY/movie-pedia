@@ -1,40 +1,45 @@
 <div class="main-head" [ngClass]="{'open': openHeader == true}" #header>
     <nav>
         <a class="logo" href="#">Movie<span>pedia</span></a>
-        <ul class="menu">
-            <li>
-                <a class="active" href="index.html">Home</a>
-            </li>
-            <li>
-                <a class="" href="movies.html">Movies</a>
-            </li>
-            <li class="">
-                <a class="" href="about.html">About</a>
-            </li>
-            <li>
-                <div id="search-bar">
-                    <input type="text" placeholder="search your movies..." id="search">
-                    <i class="fas fa-search" id="ic-search"></i>
-                </div>
+        <div class="menu">
+            <ul class="list-unstyled">
+                <li *ngFor="let item of menus">
+                    <a [routerLink]="item.url" routerLinkActive="active">{{ item.name }}</a>
+                </li>
+                <li>
+                    <div class="search-bar">
+                        <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}">
+                        <i class="fas fa-search" id="ic-search" (click)="openSearchBar()"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <img src="../../../assets/image/menu.png" class="ic-menu d-lg-none d-block" (click)="onOpenHeader()">
+        <img src="../../../assets/image/close.png" class="ic-close" (click)="onCloseHeader()">
+    </nav>
+    <div class="menu-mobile">
+        <ul class="list-unstyled">
+            <li *ngFor="let item of menus">
+                <a [routerLink]="item.url" routerLinkActive="active">{{ item.name }}</a>
             </li>
         </ul>
-        <img src="../../../assets/image/menu.png" class="ic-menu d-lg-none d-block" (click)="onOpenHeader()">
-    </nav>
-    <!-- <ul class="menu-mobile list-unstyled">
-        <li>
-            <a class="active" href="index.html">Home</a>
-        </li>
-        <li>
-            <a class="" href="movies.html">Movies</a>
-        </li>
-        <li class="">
-            <a class="" href="about.html">About</a>
-        </li>
-        <li>
-            <div id="search-bar">
-                <input type="text" placeholder="search your movies..." id="search">
-                <i class="fas fa-search" id="ic-search"></i>
-            </div>
-        </li>
-    </ul> -->
+        <div class="search-bar">
+            <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}">
+            <i class="fas fa-search" id="ic-search" (click)="openSearchBar()"></i>
+        </div>
+        <a href="" class="btn-block btn-show">Explore Now</a>
+        <div class="social text-center">
+            <ul class="list-unstyled d-flex justify-content-center">
+                <li>
+                    <a href=""><i class="fab fa-linkedin"></i></a>
+                </li>
+                <li>
+                    <a href=""><i class="fab fa-github"></i></a>
+                </li>
+                <li>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

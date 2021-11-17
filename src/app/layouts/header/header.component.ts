@@ -8,6 +8,22 @@ import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } fro
 export class HeaderComponent implements OnInit {
   @ViewChild('header') head: ElementRef;
   openHeader: boolean = false;
+  status: boolean = false;
+
+  menus = [
+    {
+      name: 'home',
+      url: '/'
+    },
+    {
+      name: 'movies',
+      url: '/movie'
+    },
+    {
+      name: 'about',
+      url: '/about'
+    },
+  ]
 
   constructor(
     private renderer: Renderer2,
@@ -37,5 +53,9 @@ export class HeaderComponent implements OnInit {
   onCloseHeader() {
     this.openHeader = false;
     this.renderer.removeClass(document.documentElement, 'overflow-hidden');
+  }
+
+  openSearchBar() {
+    this.status = !this.status;
   }
 }
