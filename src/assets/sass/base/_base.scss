@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 body {
-  background: #121621;
-  font-family: 'Quicksand', sans-serif;
-  color: #fff;
+  background: #121621 !important;
+  font-family: 'Quicksand', sans-serif !important;
+  color: #fff !important;
   box-sizing: border-box;
+}
+
+body.modal-open {
+  overflow: auto !important;
+}
+
+body.modal-open[style] {
+  padding-right: 0px !important;
 }
 
 body::-webkit-scrollbar {

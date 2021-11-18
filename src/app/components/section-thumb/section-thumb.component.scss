@@ -1,6 +1,20 @@
 .thumb {
   .why-us {
-    padding: 90px 0 0;
+    padding: 50px 0 50px;
+
+    .content-custom {
+      margin-top: 50px;
+
+      img {
+        width: 50%;
+        margin: auto;
+        border-radius: 10px;
+      }
+
+      .desc {
+        margin-top: 0;
+      }
+    }
 
     img {
       width: 90%;

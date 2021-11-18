@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ApiService } from 'src/app/shared/service/api.service';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  private readonly unSubs = new Subject<void>();
+  @ViewChild('myModal', { static: false }) myModal: ModalDirective;
+  modalRef?: BsModalRef;
 
   data = [
     {
@@ -22,6 +29,16 @@ export class HomeComponent implements OnInit {
     },
     {
       image: 'https://m.media-amazon.com/images/M/MV5BNjQ3NWNlNmQtMTE5ZS00MDdmLTlkZjUtZTBlM2UxMGFiMTU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg'
+    },
+  ]
+
+  thumb = [
+    {
+      title: 'Easy',
+      subtitle: 'Access',
+      desc: '<p>Easy to find accurate and fast movie information, you can get the best info anywhere and anytime</p><p>With the convenience you get, free time with family becomes more quality, a good spectacle can increase concentration and provide new enthusiasm and inspiration in living life</p>',
+      image: 'assets/image/home-cinema.png',
+      position: 'left',
     },
   ]
 
@@ -55,10 +72,33 @@ export class HomeComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService,
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
+    this.getData();
+  }
 
+  private getData() {
+    const api_key = this.apiService.API_KEY;
+
+    this.apiService.getDataApi(`upcoming?${api_key}&language=en-US&page=1`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        console.log(res);
+
+      })
+  }
+
+  openModal() {
+    this.myModal.show();
+  }
+
+  closeModal() {
+    // this.location.back();
+    this.myModal.hide()
   }
 
 }

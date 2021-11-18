@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-section-thumb',
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section-thumb.component.scss']
 })
 export class SectionThumbComponent implements OnInit {
+  @Input() compData: any;
 
-  constructor() { }
+  currentPage: string;
+
+  constructor(
+    private router: Router
+  ) {
+    this.currentPage = this.router.url
+  }
 
   ngOnInit(): void {
   }

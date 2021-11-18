@@ -1,6 +1,6 @@
 .home {
   .upcoming-movies {
-    padding: 90px 0 0;
+    padding: 90px 0 50px;
 
     .upcoming-title {
       text-align: center;
@@ -39,7 +39,12 @@
             opacity: 1;
           }
 
-          .btn-detail {
+          // .btn-detail {
+          //   opacity: 1;
+          //   bottom: 45%;
+          // }
+
+          .title-movie {
             opacity: 1;
             bottom: 45%;
           }
@@ -65,28 +70,105 @@
           transition: 1s;
         }
 
-        .btn-detail {
-          width: 50%;
+        // .btn-detail {
+        //   width: 50%;
+        //   position: absolute;
+        //   bottom: 0;
+        //   left: 50%;
+        //   transform: translateX(-50%);
+        //   background: transparent;
+        //   border: 1px solid #B70204;
+        //   font-size: 14px;
+        //   color: #fff;
+        //   opacity: 0;
+        //   transition: 1s;
+        //   outline: none;
+
+        //   &:hover {
+        //     background: #B70204;
+        //   }
+        // }
+
+        // button:focus {
+        //   outline: 0;
+        //   box-shadow: none;
+        // }
+
+        .title-movie {
+          width: 80%;
+          text-align: center;
           position: absolute;
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
-          background: transparent;
-          border: 1px solid #B70204;
-          font-size: 14px;
+          font-size: 16px;
           color: #fff;
           opacity: 0;
           transition: 1s;
-          outline: none;
+        }
+      }
+    }
+  }
 
-          &:hover {
-            background: #B70204;
-          }
+  .modal {
+    .modal-content {
+      background: #000000c9;
+      position: relative;
+      border-radius: 8px;
+      border: 1px solid #401d1d;
+
+      .img-detail {
+        width: 90%;
+        object-fit: cover;
+        height: 100%;
+
+        @media (max-width: 576px) {
+          width: 60%;
+        }
+      }
+
+      .detail {
+        h3 {
+          font-size: 24px;
         }
 
-        button:focus {
-          outline: 0;
+        hr {
+          background-color: #B70204;
+        }
+
+        h5 {
+          font-size: 18px;
+        }
+
+        p,
+        li {
+          font-size: 14px;
+        }
+      }
+
+      .close {
+        position: absolute;
+        right: 0;
+        opacity: 1;
+        text-shadow: none;
+        color: #B70204;
+        background: #fff;
+        padding: 3px 3px 4px;
+        line-height: 0;
+        height: 30px;
+        font-size: 40px;
+        z-index: 5;
+        cursor: pointer;
+        border-top-right-radius: 8px;
+
+        &:focus {
+          outline: none;
           box-shadow: none;
+        }
+
+        &:hover {
+          background: #B70204;
+          color: #fff;
         }
       }
     }

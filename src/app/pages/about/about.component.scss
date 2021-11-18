@@ -1,0 +1,33 @@
+.about {
+  padding: 12% 0 0;
+
+  @media (max-width: 768px) {
+    padding-top: 18%;
+  }
+
+  @media (max-width: 576px) {
+    padding-top: 25%;
+  }
+
+  .about-title {
+    text-align: center;
+    padding: 20px 0 40px;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin: 0;
+
+      span {
+        font-size: 28px;
+        color: #B70204;
+        font-weight: bold;
+      }
+    }
+
+    span {
+      font-weight: 300;
+      font-size: 14px;
+    }
+  }
+}

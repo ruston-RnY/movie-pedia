@@ -11,16 +11,53 @@
                      #slickModal="slick-carousel" 
                      [config]="slideConfig">
                <div ngxSlickItem *ngFor="let slide of data" class="slide">
-                  <div class="slider-img">
+                  <div class="slider-img" (click)="openModal()">
                      <img class="card-img-top" [src]="slide.image" alt="Card image cap">
                      <div class="overlay"></div>
-                     <button class="btn btn-detail" data-toggle="modal" data-target="#modalDetail">Detail</button>
+                     <!-- <button class="btn btn-detail" (click)="openModal()">Detail</button> -->
+                     <p class="title-movie">The Adam family</p>
                   </div>
                </div>
             </ngx-slick-carousel>
           </div>
       </div>
    </div>
-   <app-section-thumb></app-section-thumb>
+   <app-section-thumb [compData]="thumb"></app-section-thumb>
    <app-contact-us></app-contact-us>
-</section>
+
+   <!-- modal -->
+   <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1"
+   role="dialog" aria-labelledby="dialog-sizes-name1">
+     <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <img class="img-detail" src="https://image.tmdb.org/t/p/w185/ld7YB9vBRp1GM1DT3KmFWSmtBPB.jpg">
+                </div>
+                <div class="col-md-8">
+                    <div class="detail">
+                        <h3>The Addams Family 2</h3>
+                        <hr>
+                        <div class="desc">
+                            <h5>Synopsis :</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae adipisci consectetur voluptatibus ab quaerat ex. Quisquam temporibus est odit aliquam!</p>
+                        </div>
+                        <div class="detail-footer">
+                            <ul class="list-unstyled">
+                                <li>Release : 20 aug 2022</li>
+                                <li>Producer : Jhon Doe</li>
+                                <li>Actor : Jhon Doe, Amita Bax</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+     </div>
+   </div>
+  </section>
