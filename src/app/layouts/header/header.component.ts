@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   menus = [
     {
       name: 'home',
-      url: '/'
+      url: '/home'
     },
     {
       name: 'movies',

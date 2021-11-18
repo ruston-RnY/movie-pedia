@@ -28,7 +28,7 @@
 
     .left-col {
       flex-basis: 62%;
-      padding: 10% 5% 0;
+      padding: 12% 5% 0;
 
       @media (max-width: 1024px) {
         margin-top: 100px;
@@ -85,7 +85,7 @@
 
     .right-col {
       flex-basis: 38%;
-      padding: 10% 3% 0;
+      padding: 12% 3% 0;
       // background: rgba(71, 0, 204, 0.6);
       background: #320f7299;
       position: relative;
@@ -111,7 +111,7 @@
         h6 {
           font-weight: 500;
           padding-left: 30px;
-          margin-top: 50px;
+          margin-top: 40px;
           position: absolute;
           line-height: 20px;
 

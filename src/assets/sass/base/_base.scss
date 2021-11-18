@@ -6,3 +6,19 @@ body {
   color: #fff;
   box-sizing: border-box;
 }
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: rgba(99, 99, 99, 0.63);
+  // background: transparent;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #B70204;
+  border-radius: 4px;
+}

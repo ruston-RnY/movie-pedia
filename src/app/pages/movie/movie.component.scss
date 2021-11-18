@@ -1,5 +1,13 @@
 .movies {
-  padding: 10% 0 0;
+  padding: 12% 0 0;
+
+  @media (max-width: 768px) {
+    padding-top: 18%;
+  }
+
+  @media (max-width: 576px) {
+    padding-top: 25%;
+  }
 
   .search-content {
     text-align: center;
