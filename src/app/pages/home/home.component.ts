@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/shared/service/api.service';
@@ -13,24 +13,12 @@ export class HomeComponent implements OnInit {
   private readonly unSubs = new Subject<void>();
   @ViewChild('myModal', { static: false }) myModal: ModalDirective;
   modalRef?: BsModalRef;
-
-  data = [
-    {
-      image: 'https://image.tmdb.org/t/p/w185/ld7YB9vBRp1GM1DT3KmFWSmtBPB.jpg'
-    },
-    {
-      image: 'https://image.tmdb.org/t/p/w185/6AdXwFTRTAzggD2QUTt5B7JFGKL.jpg'
-    },
-    {
-      image: 'https://image.tmdb.org/t/p/w185/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg'
-    },
-    {
-      image: 'https://image.tmdb.org/t/p/w185/1UkbPQspPbq1FPbFP4VV1ELCfSN.jpg'
-    },
-    {
-      image: 'https://m.media-amazon.com/images/M/MV5BNjQ3NWNlNmQtMTE5ZS00MDdmLTlkZjUtZTBlM2UxMGFiMTU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg'
-    },
-  ]
+  movies: any;
+  urlImage = `https://image.tmdb.org/t/p/w185`;
+  api_key: any;
+  selectedMovie: any;
+  producer: any;
+  actor: any;
 
   thumb = [
     {
@@ -46,7 +34,7 @@ export class HomeComponent implements OnInit {
     'slidesToShow': 5,
     'slidesToScroll': 1,
     'autoplay': true,
-    'arrows': false,
+    'arrows': true,
     'infinite': true,
     'responsive': [
       {
@@ -65,6 +53,7 @@ export class HomeComponent implements OnInit {
         'breakpoint': 576,
         'settings': {
           'slidesToShow': 1,
+          'arrows': false,
           'centerMode': true,
           'centerPadding': '60px',
         }
@@ -74,31 +63,48 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
+    this.api_key = this.apiService.API_KEY;
     this.getData();
   }
 
   private getData() {
-    const api_key = this.apiService.API_KEY;
-
-    this.apiService.getDataApi(`upcoming?${api_key}&language=en-US&page=1`)
+    this.apiService.getDataApi(`upcoming?${this.api_key}&language=en-US&page=1`)
       .pipe(takeUntil(this.unSubs))
       .subscribe(res => {
-        console.log(res);
-
+        this.movies = res.results;
       })
   }
 
-  openModal() {
-    this.myModal.show();
-  }
-
   closeModal() {
-    // this.location.back();
     this.myModal.hide()
   }
 
+  getDetail(id) {
+    this.apiService.getDataApi(`${id}?&language=en-US&${this.api_key}`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        // console.log(res);
+        this.selectedMovie = res;
+      })
+
+    this.getCrew(id);
+
+    setTimeout(() => {
+      this.myModal.show();
+    }, 500);
+
+  }
+
+  getCrew(id) {
+    this.apiService.getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        const filter = res.crew.filter(a => a.job == 'Director');
+        this.producer = filter[0];
+        this.actor = res.cast;
+      })
+  }
 }

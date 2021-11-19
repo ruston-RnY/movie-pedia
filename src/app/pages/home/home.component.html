@@ -10,12 +10,11 @@
             <ngx-slick-carousel class="carousel" 
                      #slickModal="slick-carousel" 
                      [config]="slideConfig">
-               <div ngxSlickItem *ngFor="let slide of data" class="slide">
-                  <div class="slider-img" (click)="openModal()">
-                     <img class="card-img-top" [src]="slide.image" alt="Card image cap">
+               <div ngxSlickItem *ngFor="let slide of movies" class="slide">
+                  <div class="slider-img" (click)="getDetail(slide.id)">
+                     <img class="card-img-top" [src]="urlImage+slide.poster_path" alt="Card image cap">
                      <div class="overlay"></div>
-                     <!-- <button class="btn btn-detail" (click)="openModal()">Detail</button> -->
-                     <p class="title-movie">The Adam family</p>
+                     <p class="title-movie">{{ slide.title }} - {{ slide.release_date | date: 'y' }}</p>
                   </div>
                </div>
             </ngx-slick-carousel>
@@ -35,23 +34,29 @@
         </button>
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <img class="img-detail" src="https://image.tmdb.org/t/p/w185/ld7YB9vBRp1GM1DT3KmFWSmtBPB.jpg">
+                <div class="col-md-7 col-lg-4 mb-4">
+                    <img class="img-detail" [src]="urlImage+selectedMovie?.poster_path">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12 col-lg-8">
                     <div class="detail">
-                        <h3>The Addams Family 2</h3>
+                        <h3>{{ selectedMovie?.title }}</h3>
                         <hr>
                         <div class="desc">
                             <h5>Synopsis :</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae adipisci consectetur voluptatibus ab quaerat ex. Quisquam temporibus est odit aliquam!</p>
+                            <p>{{ selectedMovie?.overview }}</p>
                         </div>
                         <div class="detail-footer">
                             <ul class="list-unstyled">
-                                <li>Release : 20 aug 2022</li>
-                                <li>Producer : Jhon Doe</li>
-                                <li>Actor : Jhon Doe, Amita Bax</li>
+                                <li>Release : {{ selectedMovie?.release_date | date: 'd MMM y' }}</li>
+                                <li>Director : {{ producer?.name }}</li>
+                                <li>Actore : <span *ngFor="let item of actor | slice:0:5" class="pl-1">{{ item?.name }},</span></li>
                             </ul>
+                        </div>
+                        <div class="d-flex">
+                          <p>Genre :</p>
+                          <ul class="list-unstyled d-flex ml-2">
+                            <li *ngFor="let item of selectedMovie?.genres" class="mr-2">{{ item.name }},</li>
+                          </ul>
                         </div>
                     </div>
                 </div>
