@@ -36,8 +36,16 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
+    this.activatedRoute.params.subscribe(res => {
+      if (res.type) {
+        this.category = res.type
+      } else {
+        this.category = 'now_playing'
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -55,6 +63,11 @@ export class MovieListComponent implements OnInit {
 
   getMovies(item) {
     this.router.navigate(['/movie/', item]).then(() => window.location.reload())
+  }
+
+  search(value) {
+    const searchKeyword = value.target.value;
+    this.router.navigate(['/movie/', this.category, searchKeyword]).then(() => window.location.reload())
   }
 
 }

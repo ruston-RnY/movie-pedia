@@ -77,6 +77,24 @@
             z-index: -1;
           }
         }
+
+        .active {
+          background: #B70204;
+          border-right: 1px solid #121621;
+          border-left: 1px solid #121621;
+
+          &:last-child {
+            border-right: 1px solid #B70204;
+          }
+
+          &:first-child {
+            border-left: 1px solid #B70204;
+          }
+
+          &:hover {
+            background: transparent;
+          }
+        }
       }
     }
   }

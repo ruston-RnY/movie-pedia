@@ -31,6 +31,14 @@ export class ApiService {
       }).pipe(catchError(this.errorGetHandler.bind(this)));
   }
 
+  getDataSearch(param: string): Observable<any> {
+    return this.httpClient
+      .get<any>(this.API_URL + param, {
+        headers: this.headers,
+        responseType: 'json'
+      }).pipe(catchError(this.errorGetHandler.bind(this)));
+  }
+
   errorGetHandler(error: HttpErrorResponse) {
     this.router.navigate(['/server-error']);
     return throwError(error.message || 'Server Error');

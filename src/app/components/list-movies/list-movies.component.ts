@@ -24,6 +24,7 @@ export class ListMoviesComponent implements OnInit {
   selectedMovie: any;
   producer: any;
   actor: any;
+  keyword: string;
 
   constructor(
     private apiService: ApiService,
@@ -44,6 +45,8 @@ export class ListMoviesComponent implements OnInit {
     if (this.param) {
       this.getMovies();
     }
+
+    this.getDataSearch()
   }
 
   getMovies() {
@@ -93,5 +96,18 @@ export class ListMoviesComponent implements OnInit {
 
   closeModal() {
     this.myModal.hide()
+  }
+
+  getDataSearch() {
+    this.activatedRoute.params.subscribe(res => {
+      this.keyword = res.keyword;
+      console.log(this.keyword);
+
+      this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}`)
+        .pipe(takeUntil(this.unSubs))
+        .subscribe(res => {
+          this.compData = res.results;
+        })
+    })
   }
 }

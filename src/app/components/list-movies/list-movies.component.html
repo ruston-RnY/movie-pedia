@@ -1,6 +1,10 @@
 <div class="movies">
    <div class="container">
-      <h1 class="category-title">{{ category == 'now_playing' ? 'now playing' : category }}</h1>
+      <h1 class="category-title" *ngIf="keyword; else other">search results : '{{ keyword }}'</h1>
+      <ng-template #other>
+          <h1 class="category-title">{{ category == 'now_playing' ? 'now playing' : category }}</h1>
+      </ng-template>
+      
       <div class="list-movies">
          <div class="row">
              <div class="col-lg-2 col-md-3 col-6 col-custom" *ngFor="let item of compData">
