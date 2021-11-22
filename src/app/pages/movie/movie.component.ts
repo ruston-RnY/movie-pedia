@@ -29,7 +29,7 @@ export class MovieComponent implements OnInit {
 
   api_key: string;
   dataMovies: any;
-  type: string;
+  type: any;
   page = 1;
   lastPage = 6;
 
@@ -42,7 +42,7 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.api_key = this.apiService.API_KEY;
     this.nowPlaying();
-    this.type = 'now playing';
+    this.type = this.filter[0];
   }
 
   nowPlaying() {
@@ -60,7 +60,7 @@ export class MovieComponent implements OnInit {
         this.dataMovies = res.results;
       })
 
-    this.type = item.title;
+    this.type = item;
   }
 
   loadMore() {

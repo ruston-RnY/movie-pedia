@@ -1,6 +1,6 @@
 <div class="movies">
    <div class="container">
-      <h1 class="category-title">{{ compData[1] }}</h1>
+      <h1 class="category-title">{{ compData[1].title }}</h1>
       <div class="list-movies">
          <div class="row">
              <div class="col-lg-2 col-md-3 col-6 col-custom" *ngFor="let item of compData[0]">
@@ -12,6 +12,7 @@
                  </div>
              </div>
          </div>
+         <button class="btn btn-primary" (click)="loadMore(compData[1].value)" *ngIf="page < lastPage">Load More</button>
      </div>
    </div>
 </div>
