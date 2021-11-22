@@ -58,6 +58,7 @@
           cursor: pointer;
           position: relative;
           z-index: 1;
+          text-transform: capitalize;
 
           &:hover {
             span {

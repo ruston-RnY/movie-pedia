@@ -11,7 +11,14 @@ import { MovieComponent } from './movie.component';
     MovieComponent
   ],
   imports: [
-    RouterModule.forChild([{ path: '', component: MovieComponent }]),
+    RouterModule.forChild([
+      {
+        path: '', component: MovieComponent,
+        children: [
+          { path: ':type', component: MovieComponent, pathMatch: 'full' },
+        ]
+      },
+    ]),
     CommonModule,
     ComponentsModule
   ]
