@@ -8,13 +8,56 @@
                      <img class="card-img-top" [src]="urlImage+item.poster_path" alt="Card image cap">
                      <p class="title position-absolute">{{ item.title }}</p>
                      <div class="overlay"></div>
-                     <button class="btn btn-detail" data-toggle="modal" data-target="#modalDetail">Detail</button>
+                     <button class="btn btn-detail" (click)="getDetail(item.id)">Detail</button>
                  </div>
              </div>
          </div>
          <div class="text-center">
              <button class="btn-load-more" (click)="loadMore()" *ngIf="page < lastPage">Load More</button>
          </div>
+     </div>
+   </div>
+
+   <!-- modal -->
+   <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1"
+   role="dialog" aria-labelledby="dialog-sizes-name1">
+     <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-7 col-lg-4 mb-4">
+                    <img class="img-detail" [src]="urlImage+selectedMovie?.poster_path">
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    <div class="detail">
+                        <h3>{{ selectedMovie?.title }}</h3>
+                        <hr>
+                        <div class="desc">
+                            <h5>Synopsis :</h5>
+                            <p>{{ selectedMovie?.overview }}</p>
+                        </div>
+                        <div class="detail-footer">
+                            <ul class="list-unstyled">
+                                <li><span class="title">Release :</span> {{ selectedMovie?.release_date | date: 'd MMM y' }}</li>
+                                <li><span class="title">Director :</span> {{ producer?.name }}</li>
+                                <li><span class="title">Production Company :</span> {{ selectedMovie?.production_companies[0].name }}</li>
+                                <li><span class="title">Actore :</span> <span *ngFor="let item of actor | slice:0:5" class="pl-1">{{ item?.name }},</span></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex">
+                          <p class="title">Genre :</p>
+                          <ul class="list-unstyled d-flex ml-2">
+                            <li *ngFor="let item of selectedMovie?.genres" class="mr-2">{{ item.name }},</li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
      </div>
    </div>
 </div>

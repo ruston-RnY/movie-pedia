@@ -5,6 +5,7 @@ import { BannerComponent } from './banner/banner.component';
 import { SectionThumbComponent } from './section-thumb/section-thumb.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ListMoviesComponent } from './list-movies/list-movies.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -22,7 +23,8 @@ import { ListMoviesComponent } from './list-movies/list-movies.component';
     ListMoviesComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ModalModule.forRoot()
   ]
 })
 export class ComponentsModule { }

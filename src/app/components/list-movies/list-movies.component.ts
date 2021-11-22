@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/shared/service/api.service';
@@ -12,14 +13,17 @@ import { ApiService } from 'src/app/shared/service/api.service';
 export class ListMoviesComponent implements OnInit {
   private readonly unSubs = new Subject<void>();
   @Input() compData: any;
+  @ViewChild('myModal', { static: false }) myModal: ModalDirective;
 
   urlImage = `https://image.tmdb.org/t/p/w185`;
-
   page = 1;
   lastPage = 6;
   api_key: string;
   category: string;
   param: string;
+  selectedMovie: any;
+  producer: any;
+  actor: any;
 
   constructor(
     private apiService: ApiService,
@@ -64,5 +68,30 @@ export class ListMoviesComponent implements OnInit {
     else {
       console.log("disable");
     }
+  }
+
+  getDetail(id) {
+    this.apiService.getDataApi(`${id}?&language=en-US&${this.api_key}`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        this.selectedMovie = res;
+        this.getCrew(id);
+
+        this.myModal.show();
+      })
+  }
+
+  getCrew(id) {
+    this.apiService.getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        const filter = res.crew.filter(a => a.job == 'Director');
+        this.producer = filter[0];
+        this.actor = res.cast;
+      })
+  }
+
+  closeModal() {
+    this.myModal.hide()
   }
 }

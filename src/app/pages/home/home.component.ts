@@ -86,16 +86,11 @@ export class HomeComponent implements OnInit {
     this.apiService.getDataApi(`${id}?&language=en-US&${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
       .subscribe(res => {
-        // console.log(res);
         this.selectedMovie = res;
+        this.getCrew(id);
+
+        this.myModal.show();
       })
-
-    this.getCrew(id);
-
-    setTimeout(() => {
-      this.myModal.show();
-    }, 500);
-
   }
 
   getCrew(id) {
