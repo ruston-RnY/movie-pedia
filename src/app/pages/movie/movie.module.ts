@@ -4,18 +4,21 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 import { MovieComponent } from './movie.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 
 @NgModule({
   declarations: [
-    MovieComponent
+    MovieComponent,
+    MovieListComponent
   ],
   imports: [
     RouterModule.forChild([
       {
         path: '', component: MovieComponent,
         children: [
-          { path: ':type', component: MovieComponent, pathMatch: 'full' },
+          { path: '', component: MovieListComponent, pathMatch: 'full' },
+          { path: ':type', component: MovieListComponent, pathMatch: 'full' },
         ]
       },
     ]),

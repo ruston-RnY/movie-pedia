@@ -1,0 +1,83 @@
+.movies {
+  padding: 12% 0 0;
+
+  @media (max-width: 768px) {
+    padding-top: 18%;
+  }
+
+  @media (max-width: 576px) {
+    padding-top: 25%;
+  }
+
+  .search-content {
+    text-align: center;
+    padding: 20px 0 40px;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin: 0;
+
+      span {
+        font-size: 28px;
+        color: #B70204;
+        font-weight: bold;
+      }
+    }
+
+    span {
+      font-weight: 300;
+      font-size: 14px;
+    }
+
+    .search {
+      margin: auto;
+
+      .search-bar {
+        border-radius: 20px;
+        padding: 5px 10px;
+        outline: none;
+        border: 1px solid #fff;
+        background: transparent;
+        color: #fff;
+        font-size: 14px;
+
+        &::placeholder {
+          text-align: center;
+          font-size: 14px;
+        }
+      }
+
+      .breadcrumb {
+        background-color: transparent;
+
+        li {
+          border: 1px solid #B70204;
+          padding: 5px 10px;
+          font-size: 14px;
+          cursor: pointer;
+          position: relative;
+          z-index: 1;
+          text-transform: capitalize;
+
+          &:hover {
+            span {
+              width: 100%;
+            }
+          }
+
+          span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            background: #B70204;
+            height: 100%;
+            transition: 1s;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+}
