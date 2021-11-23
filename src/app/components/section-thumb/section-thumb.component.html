@@ -2,10 +2,10 @@
    <div class="why-us">
       <div class="container">
           <div class="row" *ngFor="let item of compData" [ngClass]="{'content-custom': item.position == 'right'}">
-              <div class="col-md-6" [ngClass]="{'order-2 d-flex': item.position == 'right'}">
+              <div class="col-md-6" [ngClass]="{'order-2 d-flex': item.position == 'right'}" data-aos="zoom-out">
                   <img [src]="item.image">
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" data-aos="fade-up">
                   <div class="desc">
                       <h2>{{ item.title }} <span>{{ item?.subtitle }}</span></h2>
                       <div [innerHTML]="item.desc"></div>

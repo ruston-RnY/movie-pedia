@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'movie-pedia';
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      AOS.init({
+        once: true
+      });
+    }, 1000);
+  }
 }
