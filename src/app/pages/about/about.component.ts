@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/shared/service/api.service';
 
 @Component({
   selector: 'app-about',
@@ -24,10 +25,16 @@ export class AboutComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) {
+    this.apiService.isLoading.next(true);
+  }
 
   ngOnInit(): void {
-
+    setTimeout(() => {
+      this.apiService.isLoading.next(false);
+    }, 500)
   }
 
 }

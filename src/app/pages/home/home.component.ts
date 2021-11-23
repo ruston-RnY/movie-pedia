@@ -63,7 +63,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-  ) { }
+  ) {
+    this.apiService.isLoading.next(true);
+  }
 
   ngOnInit(): void {
     this.api_key = this.apiService.API_KEY;
@@ -75,6 +77,9 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntil(this.unSubs))
       .subscribe(res => {
         this.movies = res.results;
+        setTimeout(() => {
+          this.apiService.isLoading.next(false);
+        }, 900)
       })
   }
 

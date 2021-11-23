@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import * as AOS from 'aos';
+import { ApiService } from './shared/service/api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,14 @@ import * as AOS from 'aos';
 })
 export class AppComponent {
   title = 'movie-pedia';
+  public loading = true;
+
+  constructor(
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef,
+  ) {
+
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -15,5 +24,11 @@ export class AppComponent {
         once: true
       });
     }, 1000);
+
+
+    this.apiService.isLoading.subscribe(data => {
+      this.loading = data;
+    });
+    this.cdr.detectChanges();
   }
 }
