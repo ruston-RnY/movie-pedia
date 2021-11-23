@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +59,10 @@ export class HeaderComponent implements OnInit {
 
   openSearchBar() {
     this.status = !this.status;
+  }
+
+  search(value) {
+    const searchKeyword = value.target.value;
+    this.router.navigate(['/movie/search/', searchKeyword]).then(() => window.location.reload())
   }
 }

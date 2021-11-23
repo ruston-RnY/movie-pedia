@@ -8,7 +8,7 @@
                 </li>
                 <li>
                     <div class="search-bar">
-                        <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}">
+                        <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}" (change)="search($event)" autofocus autocomplete>
                         <i class="fas fa-search" id="ic-search" (click)="openSearchBar()"></i>
                     </div>
                 </li>
@@ -20,14 +20,14 @@
     <div class="menu-mobile">
         <ul class="list-unstyled">
             <li *ngFor="let item of menus">
-                <a [routerLink]="item.url" routerLinkActive="active">{{ item.name }}</a>
+                <a [routerLink]="item.url" routerLinkActive="active" (click)="onCloseHeader()">{{ item.name }}</a>
             </li>
         </ul>
         <div class="search-bar">
-            <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}">
-            <i class="fas fa-search" id="ic-search" (click)="openSearchBar()"></i>
+            <input type="text" placeholder="search your movies..." (change)="search($event)">
+            <i class="fas fa-search" id="ic-search"></i>
         </div>
-        <a href="" class="btn-block btn-show">Explore Now</a>
+        <a [routerLink]="'/movie'" class="btn-block btn-show" (click)="onCloseHeader()">Explore Now</a>
         <div class="social text-center">
             <ul class="list-unstyled d-flex justify-content-center">
                 <li>

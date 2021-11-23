@@ -1,5 +1,6 @@
 footer {
   border-top: 1px solid #fff;
+  position: relative;
 
   h5 {
     margin: 0;
@@ -15,5 +16,43 @@ footer {
       color: #B70204;
       font-weight: bold;
     }
+  }
+
+  .wrap-arw {
+    position: absolute;
+    top: -15px;
+    border-radius: 50px 50px 0 0;
+    background: #B70204;
+    padding: 8px 5px 0;
+    margin: 0 5%;
+    right: 0;
+
+    @media (max-width:576px) {
+      top: -25px;
+    }
+
+    .btn-scroll-top {
+      border: none;
+      outline: none;
+      color: #fff;
+      background: transparent;
+      animation: fadeInUp 1.2s ease infinite;
+      position: relative;
+      top: -6px;
+
+      @keyframes fadeInUp {
+        0% {
+          transform: translate(0px, 5px);
+          opacity: 0;
+        }
+
+        100% {
+          transform: translate(0px, 0);
+          opacity: 1;
+        }
+      }
+
+    }
+
   }
 }

@@ -5,10 +5,29 @@
     .content-custom {
       margin-top: 50px;
 
+      .box-img {
+        order: 2;
+
+        @media (max-width: 576px) {
+          order: 1;
+          margin-bottom: 40px;
+        }
+      }
+
+      .box-desc {
+        @media (max-width: 576px) {
+          order: 2;
+        }
+      }
+
       img {
         width: 50%;
         margin: auto;
         border-radius: 10px;
+
+        @media (max-width: 576px) {
+          width: 80%;
+        }
       }
 
       .desc {
@@ -22,6 +41,10 @@
 
     .desc {
       margin-top: 50px;
+
+      @media (max-width: 576px) {
+        margin-top: 0;
+      }
 
       h2 {
         font-size: 24px;
