@@ -42,8 +42,6 @@ export class MovieListComponent implements OnInit {
     this.activatedRoute.params.subscribe(res => {
       if (res.type) {
         this.category = res.type
-      } else {
-        this.category = 'now_playing'
       }
     })
   }
@@ -67,7 +65,7 @@ export class MovieListComponent implements OnInit {
 
   search(value) {
     const searchKeyword = value.target.value;
-    this.router.navigate(['/movie/', this.category, searchKeyword]).then(() => window.location.reload())
+    this.router.navigate(['/movie/search/', searchKeyword]).then(() => window.location.reload())
   }
 
 }

@@ -25,17 +25,17 @@ export class ListMoviesComponent implements OnInit {
   producer: any;
   actor: any;
   keyword: string;
+  lastPageSearch: any;
 
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.params.subscribe(res => {
+      this.keyword = res.keyword;
       this.param = res.type;
       if (res.type) {
         this.category = res.type
-      } else {
-        this.category = 'now_playing'
       }
     })
   }
@@ -46,7 +46,9 @@ export class ListMoviesComponent implements OnInit {
       this.getMovies();
     }
 
-    this.getDataSearch()
+    if (this.keyword) {
+      this.getDataSearch()
+    }
   }
 
   getMovies() {
@@ -60,16 +62,42 @@ export class ListMoviesComponent implements OnInit {
   }
 
   loadMore() {
-    if (this.page < this.lastPage) {
-      this.page++;
-      this.apiService.getDataApi(`${this.category}?${this.api_key}&page=${this.page}`)
-        .pipe(takeUntil(this.unSubs))
-        .subscribe(res => {
-          this.compData = [...this.compData, ...res.results];
-        })
-    }
-    else {
-      console.log("disable");
+    if (this.keyword) {
+      if (this.page < this.lastPage) {
+        this.page++;
+        this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}&page=${this.page}`)
+          .pipe(takeUntil(this.unSubs))
+          .subscribe(res => {
+            this.compData = [...this.compData, ...res.results];
+          })
+      }
+      else {
+        console.log("disable");
+      }
+    } else if (this.category) {
+      if (this.page < this.lastPage) {
+        this.page++;
+        this.apiService.getDataApi(`${this.category}?${this.api_key}&page=${this.page}`)
+          .pipe(takeUntil(this.unSubs))
+          .subscribe(res => {
+            this.compData = [...this.compData, ...res.results];
+          })
+      }
+      else {
+        console.log("disable");
+      }
+    } else {
+      if (this.page < this.lastPage) {
+        this.page++;
+        this.apiService.getDataApi(`now_playing?${this.api_key}&page=${this.page}`)
+          .pipe(takeUntil(this.unSubs))
+          .subscribe(res => {
+            this.compData = [...this.compData, ...res.results];
+          })
+      }
+      else {
+        console.log("disable");
+      }
     }
   }
 
@@ -99,15 +127,11 @@ export class ListMoviesComponent implements OnInit {
   }
 
   getDataSearch() {
-    this.activatedRoute.params.subscribe(res => {
-      this.keyword = res.keyword;
-      console.log(this.keyword);
-
-      this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}`)
-        .pipe(takeUntil(this.unSubs))
-        .subscribe(res => {
-          this.compData = res.results;
-        })
-    })
+    this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}`)
+      .pipe(takeUntil(this.unSubs))
+      .subscribe(res => {
+        this.lastPageSearch = res.total_pages;
+        this.compData = res.results;
+      })
   }
 }

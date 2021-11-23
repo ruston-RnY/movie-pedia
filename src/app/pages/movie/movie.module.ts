@@ -19,7 +19,7 @@ import { MovieListComponent } from './movie-list/movie-list.component';
         children: [
           { path: '', component: MovieListComponent, pathMatch: 'full' },
           { path: ':type', component: MovieListComponent, pathMatch: 'full' },
-          { path: ':type/:keyword', component: MovieListComponent, pathMatch: 'full' },
+          { path: 'search/:keyword', component: MovieListComponent, pathMatch: 'full' },
         ]
       },
     ]),

@@ -2,14 +2,17 @@
    <div class="container">
       <h1 class="category-title" *ngIf="keyword; else other">search results : '{{ keyword }}'</h1>
       <ng-template #other>
-          <h1 class="category-title">{{ category == 'now_playing' ? 'now playing' : category }}</h1>
+          <h1 class="category-title" *ngIf="category; else noCategory">{{ category == 'now_playing' ? 'now playing' : category }}</h1>
+      </ng-template>
+      <ng-template #noCategory>
+        <h1 class="category-title">now playing</h1>
       </ng-template>
       
       <div class="list-movies">
          <div class="row">
              <div class="col-lg-2 col-md-3 col-6 col-custom" *ngFor="let item of compData">
                  <div class="slider-img">
-                     <img class="card-img-top" [src]="urlImage+item.poster_path" alt="Card image cap">
+                     <img class="card-img-top" [src]="urlImage+item.poster_path" onerror="this.src='https://via.placeholder.com/125?text=no-image'">
                      <p class="title position-absolute">{{ item.title }}</p>
                      <div class="overlay"></div>
                      <button class="btn btn-detail" (click)="getDetail(item.id)">Detail</button>
@@ -17,7 +20,12 @@
              </div>
          </div>
          <div class="text-center">
-             <button class="btn-load-more" (click)="loadMore()" *ngIf="page < lastPage">Load More</button>
+             <ng-container *ngIf="keyword; else loadMoreOther">
+                 <button class="btn-load-more" (click)="loadMore()" *ngIf="page < lastPageSearch">Load More</button>
+             </ng-container>
+             <ng-template #loadMoreOther>
+                 <button class="btn-load-more" (click)="loadMore()" *ngIf="page < lastPage">Load More</button>
+             </ng-template>
          </div>
      </div>
    </div>
@@ -33,7 +41,7 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-7 col-lg-4 mb-4">
-                    <img class="img-detail" [src]="urlImage+selectedMovie?.poster_path">
+                    <img class="img-detail" [src]="urlImage+selectedMovie?.poster_path" onerror="this.src='https://via.placeholder.com/125?text=no-image'">
                 </div>
                 <div class="col-md-12 col-lg-8">
                     <div class="detail">
