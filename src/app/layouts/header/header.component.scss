@@ -105,11 +105,7 @@
               position: relative;
               top: 3px;
               cursor: pointer;
-
-              &:hover {
-                color: #B70204;
-              }
-
+              color: #B70204;
             }
 
             input {
@@ -118,23 +114,27 @@
               top: 30px;
               padding: 10px 15px;
               border-radius: 55px;
-              color: #fff;
+              color: #000;
+              font-weight: 500;
               font-size: 14px;
               background: transparent;
               outline: none;
               width: 0px;
               transition: 1s;
               border: 1px solid transparent;
+              visibility: hidden;
 
               &::placeholder {
                 text-align: center;
-                color: #fff;
+                color: #000;
               }
 
               &.active {
+                visibility: visible;
                 width: 300px;
                 border: 1px solid #000;
-                background: #fb1c1cde;
+                // background: #fb1c1cde;
+                background: #ffff;
               }
             }
           }

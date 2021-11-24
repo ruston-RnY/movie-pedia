@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('myModal', { static: false }) myModal: ModalDirective;
   modalRef?: BsModalRef;
   movies: any;
-  urlImage = `https://image.tmdb.org/t/p/w500`;
+  urlImage = `https://image.tmdb.org/t/p/`;
   api_key: any;
   selectedMovie: any;
   producer: any;

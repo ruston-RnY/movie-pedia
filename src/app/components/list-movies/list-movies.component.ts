@@ -15,7 +15,7 @@ export class ListMoviesComponent implements OnInit {
   @Input() compData: any;
   @ViewChild('myModal', { static: false }) myModal: ModalDirective;
 
-  urlImage = `https://image.tmdb.org/t/p/w500`;
+  urlImage = `https://image.tmdb.org/t/p/`;
   page = 1;
   lastPage = 6;
   api_key: string;
