@@ -39,7 +39,6 @@ export class MovieListComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.apiService.isLoading.next(true);
     this.activatedRoute.params.subscribe(res => {
       if (res.type) {
         this.category = res.type
@@ -57,9 +56,6 @@ export class MovieListComponent implements OnInit {
       .pipe(takeUntil(this.unSubs))
       .subscribe(res => {
         this.dataMovies = res.results;
-        setTimeout(() => {
-          this.apiService.isLoading.next(false);
-        }, 900)
       })
   }
 
@@ -72,4 +68,8 @@ export class MovieListComponent implements OnInit {
     this.router.navigate(['/movie/search/', searchKeyword]).then(() => window.location.reload())
   }
 
+  ngOnDestroy() {
+    this.unSubs.next();
+    this.unSubs.complete();
+  }
 }

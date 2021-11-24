@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('myModal', { static: false }) myModal: ModalDirective;
   modalRef?: BsModalRef;
   movies: any;
-  urlImage = `https://image.tmdb.org/t/p/w185`;
+  urlImage = `https://image.tmdb.org/t/p/w500`;
   api_key: any;
   selectedMovie: any;
   producer: any;
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     'slidesToScroll': 1,
     'autoplay': true,
     'arrows': true,
-    'infinite': true,
+    'infinite': false,
     'responsive': [
       {
         'breakpoint': 1050,
@@ -63,9 +63,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-  ) {
-    this.apiService.isLoading.next(true);
-  }
+  ) { }
 
   ngOnInit(): void {
     this.api_key = this.apiService.API_KEY;
@@ -77,9 +75,6 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntil(this.unSubs))
       .subscribe(res => {
         this.movies = res.results;
-        setTimeout(() => {
-          this.apiService.isLoading.next(false);
-        }, 900)
       })
   }
 
@@ -106,5 +101,10 @@ export class HomeComponent implements OnInit {
         this.producer = filter[0];
         this.actor = res.cast;
       })
+  }
+
+  ngOnDestroy() {
+    this.unSubs.next();
+    this.unSubs.complete();
   }
 }

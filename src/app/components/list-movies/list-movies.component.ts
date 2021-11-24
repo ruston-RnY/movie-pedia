@@ -15,7 +15,7 @@ export class ListMoviesComponent implements OnInit {
   @Input() compData: any;
   @ViewChild('myModal', { static: false }) myModal: ModalDirective;
 
-  urlImage = `https://image.tmdb.org/t/p/w185`;
+  urlImage = `https://image.tmdb.org/t/p/w500`;
   page = 1;
   lastPage = 6;
   api_key: string;
@@ -133,5 +133,10 @@ export class ListMoviesComponent implements OnInit {
         this.lastPageSearch = res.total_pages;
         this.compData = res.results;
       })
+  }
+
+  ngOnDestroy() {
+    this.unSubs.next();
+    this.unSubs.complete();
   }
 }
