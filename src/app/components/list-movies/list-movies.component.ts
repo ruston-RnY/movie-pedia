@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/shared/service/api.service';
 @Component({
   selector: 'app-list-movies',
   templateUrl: './list-movies.component.html',
-  styleUrls: ['./list-movies.component.scss']
+  styleUrls: ['./list-movies.component.scss'],
 })
 export class ListMoviesComponent implements OnInit {
   private readonly unSubs = new Subject<void>();
@@ -31,13 +31,13 @@ export class ListMoviesComponent implements OnInit {
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params.subscribe(res => {
+    this.activatedRoute.params.subscribe((res) => {
       this.keyword = res.keyword;
       this.param = res.type;
       if (res.type) {
-        this.category = res.type
+        this.category = res.type;
       }
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -47,92 +47,100 @@ export class ListMoviesComponent implements OnInit {
     }
 
     if (this.keyword) {
-      this.getDataSearch()
+      this.getDataSearch();
     }
   }
 
   getMovies() {
-    this.activatedRoute.params.subscribe(res => {
-      this.apiService.getDataApi(`${res.type}?${this.api_key}&language=en-US&page=1`)
+    this.activatedRoute.params.subscribe((res) => {
+      this.apiService
+        .getDataApi(`${res.type}?${this.api_key}&language=en-US&page=1`)
         .pipe(takeUntil(this.unSubs))
-        .subscribe(res => {
+        .subscribe((res) => {
           this.compData = res.results;
-        })
-    })
+        });
+    });
   }
 
   loadMore() {
     if (this.keyword) {
       if (this.page < this.lastPage) {
         this.page++;
-        this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}&page=${this.page}`)
+        this.apiService
+          .getDataSearch(
+            `search/movie?${this.api_key}&language=en-US&query=${this.keyword}&page=${this.page}`
+          )
           .pipe(takeUntil(this.unSubs))
-          .subscribe(res => {
+          .subscribe((res) => {
             this.compData = [...this.compData, ...res.results];
-          })
-      }
-      else {
-        console.log("disable");
+          });
+      } else {
+        console.log('disable');
       }
     } else if (this.category) {
       if (this.page < this.lastPage) {
         this.page++;
-        this.apiService.getDataApi(`${this.category}?${this.api_key}&page=${this.page}`)
+        this.apiService
+          .getDataApi(`${this.category}?${this.api_key}&page=${this.page}`)
           .pipe(takeUntil(this.unSubs))
-          .subscribe(res => {
+          .subscribe((res) => {
             this.compData = [...this.compData, ...res.results];
-          })
-      }
-      else {
-        console.log("disable");
+          });
+      } else {
+        console.log('disable');
       }
     } else {
       if (this.page < this.lastPage) {
         this.page++;
-        this.apiService.getDataApi(`now_playing?${this.api_key}&page=${this.page}`)
+        this.apiService
+          .getDataApi(`now_playing?${this.api_key}&page=${this.page}`)
           .pipe(takeUntil(this.unSubs))
-          .subscribe(res => {
+          .subscribe((res) => {
             this.compData = [...this.compData, ...res.results];
-          })
-      }
-      else {
-        console.log("disable");
+          });
+      } else {
+        console.log('disable');
       }
     }
   }
 
   getDetail(id) {
-    this.apiService.getDataApi(`${id}?&language=en-US&${this.api_key}`)
+    this.apiService
+      .getDataApi(`${id}?&language=en-US&${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.selectedMovie = res;
         this.getCrew(id);
 
         this.myModal.show();
-      })
+      });
   }
 
   getCrew(id) {
-    this.apiService.getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
+    this.apiService
+      .getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
-        const filter = res.crew.filter(a => a.job == 'Director');
+      .subscribe((res) => {
+        const filter = res.crew.filter((a) => a.job == 'Director');
         this.producer = filter[0];
         this.actor = res.cast;
-      })
+      });
   }
 
   closeModal() {
-    this.myModal.hide()
+    this.myModal.hide();
   }
 
   getDataSearch() {
-    this.apiService.getDataSearch(`search/movie?${this.api_key}&language=en-US&query=${this.keyword}`)
+    this.apiService
+      .getDataSearch(
+        `search/movie?${this.api_key}&language=en-US&query=${this.keyword}`
+      )
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.lastPageSearch = res.total_pages;
         this.compData = res.results;
-      })
+      });
   }
 
   ngOnDestroy() {

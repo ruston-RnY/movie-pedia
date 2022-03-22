@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/shared/service/api.service';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.scss']
+  styleUrls: ['./movie-list.component.scss'],
 })
 export class MovieListComponent implements OnInit {
   private readonly unSubs = new Subject<void>();
@@ -15,15 +15,15 @@ export class MovieListComponent implements OnInit {
   filter = [
     {
       title: 'Now Playing',
-      value: 'now_playing'
+      value: 'now_playing',
     },
     {
       title: 'Upcoming',
-      value: 'upcoming'
+      value: 'upcoming',
     },
     {
       title: 'Popular',
-      value: 'popular'
+      value: 'popular',
     },
   ];
 
@@ -39,11 +39,11 @@ export class MovieListComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params.subscribe(res => {
+    this.activatedRoute.params.subscribe((res) => {
       if (res.type) {
-        this.category = res.type
+        this.category = res.type;
       }
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -52,20 +52,24 @@ export class MovieListComponent implements OnInit {
   }
 
   nowPlaying() {
-    this.apiService.getDataApi(`now_playing?${this.api_key}`)
+    this.apiService
+      .getDataApi(`now_playing?${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.dataMovies = res.results;
-      })
+      });
   }
 
   getMovies(item) {
-    this.router.navigate(['/movie/', item]).then(() => window.location.reload())
+    // this.router.navigate(['/movie/', item]).then(() => window.location.reload())
+    this.router.navigate(['/movie/', item]);
   }
 
   search(value) {
     const searchKeyword = value.target.value;
-    this.router.navigate(['/movie/search/', searchKeyword]).then(() => window.location.reload())
+    this.router
+      .navigate(['/movie/search/', searchKeyword])
+      .then(() => window.location.reload());
   }
 
   ngOnDestroy() {

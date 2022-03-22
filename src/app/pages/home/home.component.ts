@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/shared/service/api.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   private readonly unSubs = new Subject<void>();
@@ -28,42 +28,40 @@ export class HomeComponent implements OnInit {
       image: 'assets/image/home-cinema.png',
       position: 'left',
     },
-  ]
+  ];
 
   slideConfig = {
-    'slidesToShow': 5,
-    'slidesToScroll': 1,
-    'autoplay': true,
-    'arrows': true,
-    'infinite': false,
-    'responsive': [
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: true,
+    infinite: false,
+    responsive: [
       {
-        'breakpoint': 1050,
-        'settings': {
-          'slidesToShow': 4
-        }
+        breakpoint: 1050,
+        settings: {
+          slidesToShow: 4,
+        },
       },
       {
-        'breakpoint': 800,
-        'settings': {
-          'slidesToShow': 3
-        }
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 3,
+        },
       },
       {
-        'breakpoint': 576,
-        'settings': {
-          'slidesToShow': 1,
-          'arrows': false,
-          'centerMode': true,
-          'centerPadding': '60px',
-        }
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+          centerMode: true,
+          centerPadding: '60px',
+        },
       },
-    ]
+    ],
   };
 
-  constructor(
-    private apiService: ApiService,
-  ) { }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.api_key = this.apiService.API_KEY;
@@ -71,36 +69,39 @@ export class HomeComponent implements OnInit {
   }
 
   private getData() {
-    this.apiService.getDataApi(`upcoming?${this.api_key}&language=en-US&page=1`)
+    this.apiService
+      .getDataApi(`upcoming?${this.api_key}&language=en-US&page=1`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.movies = res.results;
-      })
+      });
   }
 
   closeModal() {
-    this.myModal.hide()
+    this.myModal.hide();
   }
 
   getDetail(id) {
-    this.apiService.getDataApi(`${id}?&language=en-US&${this.api_key}`)
+    this.apiService
+      .getDataApi(`${id}?&language=en-US&${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
+      .subscribe((res) => {
         this.selectedMovie = res;
         this.getCrew(id);
 
         this.myModal.show();
-      })
+      });
   }
 
   getCrew(id) {
-    this.apiService.getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
+    this.apiService
+      .getDataApi(`${id}/credits?&language=en-US&${this.api_key}`)
       .pipe(takeUntil(this.unSubs))
-      .subscribe(res => {
-        const filter = res.crew.filter(a => a.job == 'Director');
+      .subscribe((res) => {
+        const filter = res.crew.filter((a) => a.job == 'Director');
         this.producer = filter[0];
         this.actor = res.cast;
-      })
+      });
   }
 
   ngOnDestroy() {

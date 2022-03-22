@@ -1,47 +1,82 @@
-<div class="main-head" [ngClass]="{'open': openHeader == true}" #header>
-    <nav>
-        <a class="logo" href="#">Movie<span>pedia</span></a>
-        <div class="menu">
-            <ul class="list-unstyled">
-                <li *ngFor="let item of menus">
-                    <a [routerLink]="item.url" [routerLinkActive]="'active'">{{ item.name }}</a>
-                </li>
-                <li>
-                    <div class="search-bar">
-                        <input type="text" placeholder="search your movies..." id="search" [ngClass]="{'active': status}" (change)="search($event)" autofocus autocomplete>
-                        <i class="fas fa-search" id="ic-search" (click)="openSearchBar()"></i>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <!-- <img src="../../../assets/image/menu.png" class="ic-menu d-lg-none d-block" (click)="onOpenHeader()">
-        <img src="../../../assets/image/close.png" class="ic-close" (click)="onCloseHeader()"> -->
-        <img src="assets/image/menu.png" class="ic-menu d-lg-none d-block" (click)="onOpenHeader()">
-        <img src="assets/image/close.png" class="ic-close" (click)="onCloseHeader()">
-    </nav>
-    <div class="menu-mobile">
-        <ul class="list-unstyled">
-            <li *ngFor="let item of menus">
-                <a [routerLink]="item.url" routerLinkActive="active" (click)="onCloseHeader()">{{ item.name }}</a>
-            </li>
-        </ul>
-        <div class="search-bar">
-            <input type="text" placeholder="search your movies..." (change)="search($event)">
-            <i class="fas fa-search" id="ic-search"></i>
-        </div>
-        <a [routerLink]="'/movie'" class="btn-block btn-show" (click)="onCloseHeader()">Explore Now</a>
-        <div class="social text-center">
-            <ul class="list-unstyled d-flex justify-content-center">
-                <li>
-                    <a href=""><i class="fab fa-linkedin"></i></a>
-                </li>
-                <li>
-                    <a href=""><i class="fab fa-github"></i></a>
-                </li>
-                <li>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                </li>
-            </ul>
-        </div>
+<div class="main-head" [ngClass]="{ open: openHeader == true }" #header>
+  <nav>
+    <a class="logo" href="#">Movie<span>pedia</span></a>
+    <div class="menu">
+      <ul class="list-unstyled">
+        <li *ngFor="let item of menus">
+          <a [routerLink]="item.url" [routerLinkActive]="'active'">{{
+            item.name
+          }}</a>
+        </li>
+        <li>
+          <div class="search-bar">
+            <input
+              type="text"
+              placeholder="search your movies..."
+              id="search"
+              [ngClass]="{ active: status }"
+              (change)="search($event)"
+              autofocus
+              autocomplete
+            />
+            <i
+              class="fas fa-search"
+              id="ic-search"
+              (click)="openSearchBar()"
+            ></i>
+          </div>
+        </li>
+      </ul>
     </div>
+    <img
+      src="assets/image/menu.png"
+      class="ic-menu d-lg-none d-block"
+      (click)="onOpenHeader()"
+    />
+    <img
+      src="assets/image/close.png"
+      class="ic-close"
+      (click)="onCloseHeader()"
+    />
+  </nav>
+  <div class="menu-mobile">
+    <ul class="list-unstyled">
+      <li *ngFor="let item of menus">
+        <a
+          [routerLink]="item.url"
+          routerLinkActive="active"
+          (click)="onCloseHeader()"
+          >{{ item.name }}</a
+        >
+      </li>
+    </ul>
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="search your movies..."
+        (change)="search($event)"
+      />
+      <i class="fas fa-search" id="ic-search"></i>
+    </div>
+    <a
+      [routerLink]="'/movie'"
+      class="btn-block btn-show"
+      (click)="onCloseHeader()"
+      >Explore Now</a
+    >
+    <div class="social text-center">
+      <ul class="list-unstyled d-flex justify-content-center">
+        <li>
+          <a href="https://id.linkedin.com/in/ruston-efendi-jr93" target="blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </li>
+        <li>
+          <a href="https://github.com/ruston-RnY" target="blank"
+            ><i class="fab fa-github"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

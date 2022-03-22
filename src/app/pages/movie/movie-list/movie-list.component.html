@@ -1,18 +1,29 @@
 <section class="movies">
-   <div class="container">
-        <div class="search-content" data-aos="zoom-in">
-            <h2>Search your <span>Movies</span></h2>
-            <span>Don't miss the latest movie info</span>
-            <div class="search mt-3">
-                <input type="text" placeholder="keyword..." class="search-bar" (change)="search($event)">
-                <div class="d-flex justify-content-center mt-3">
-                    <ul class="breadcrumb">
-                        <li *ngFor="let item of filter" (click)="getMovies(item.value)" [ngClass]="{'active': category == item.value}"><span></span>{{ item.title }}</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="container">
+    <div class="search-content" data-aos="zoom-in">
+      <h2>Search your <span>Movies</span></h2>
+      <span>Don't miss the latest movie info</span>
+      <div class="search mt-3">
+        <input
+          type="text"
+          placeholder="keyword..."
+          class="search-bar"
+          (change)="search($event)"
+        />
+        <div class="d-flex justify-content-center mt-3">
+          <ul class="breadcrumb">
+            <li
+              *ngFor="let item of filter"
+              (click)="getMovies(item.value)"
+              [ngClass]="{ active: category == item.value }"
+            >
+              <span></span>{{ item.title }}
+            </li>
+          </ul>
         </div>
-   </div>
-   <app-list-movies [compData]="dataMovies"></app-list-movies>
-   <app-contact-us></app-contact-us>
+      </div>
+    </div>
+  </div>
+  <app-list-movies [compData]="dataMovies"></app-list-movies>
+  <app-contact-us></app-contact-us>
 </section>
