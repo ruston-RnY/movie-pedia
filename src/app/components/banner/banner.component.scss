@@ -4,11 +4,11 @@
     color: #fff;
     font-size: 16px;
     padding: 10px 40px;
-    border: 1px solid #B70204;
+    border: 1px solid #b70204;
     border-radius: 10px;
 
     &:hover {
-      background: #B70204;
+      background: #b70204;
       color: #fff;
     }
   }
@@ -50,7 +50,6 @@
         }
 
         .bnr {
-
           img {
             width: 100%;
             border-radius: 10px;
@@ -62,7 +61,6 @@
             }
           }
         }
-
       }
 
       .desc {
@@ -72,13 +70,16 @@
           font-weight: 500;
 
           span {
-            color: #B70204;
+            color: #b70204;
             font-weight: bold;
           }
         }
 
         p {
           text-transform: capitalize;
+        }
+        .banner-text {
+          text-transform: none;
         }
       }
     }
@@ -116,8 +117,8 @@
           line-height: 20px;
 
           &::before {
-            content: '';
-            background: #B70204;
+            content: "";
+            background: #b70204;
             height: 100%;
             width: 6px;
             border-radius: 5px;
@@ -130,7 +131,6 @@
           @media (max-width: 576px) {
             display: none;
           }
-
         }
       }
     }
