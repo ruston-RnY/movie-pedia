@@ -12,7 +12,7 @@ export class ApiService {
   isLoading = new BehaviorSubject<boolean>(false);
 
   API_URL = environment.API_URL;
-  API_KEY = `api_key=c9a52b6ee679b14d7acbdd1aec87cdeb`;
+  API_KEY = `your api key`;
   API_MOVIE = `${this.API_URL}movie/`;
 
   // Setting request headers to JSON
